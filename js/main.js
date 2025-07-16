@@ -13,6 +13,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function displayProducts(products) {
         productList.innerHTML = ''; // Clear previous list
+        if (products.length === 0){
+            productList.innerHTML = '<p>ไม่พบสินค้าที่ตรงกัน</p>';
+            return
+        }
         products.forEach(product => {
             const card = document.createElement('div');
             card.className = 'product-card';
@@ -28,6 +32,11 @@ document.addEventListener('DOMContentLoaded', () => {
     // Inefficient Search abcd
     searchInput.addEventListener('keyup', () => {
         const searchTerm = searchInput.value.toLowerCase();
+        if (searchTerm === '') {
+        // ถ้า input ว่างเปล่า → แสดงสินค้าทั้งหมด
+        displayProducts(allProducts);
+        return;
+    }
         const filteredProducts = allProducts.filter(product => {
             // Simple search, not very efficient
             return product.name.toLowerCase().includes(searchTerm);
