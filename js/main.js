@@ -12,7 +12,11 @@ document.addEventListener('DOMContentLoaded', () => {
         .then(data => {
             allProducts = data;
             displayProducts(allProducts);
-        });
+        })
+        .finally(() => {
+            loader.style.display = 'none';
+        })
+        
 
     function displayProducts(products) {
         productList.innerHTML = ''; // Clear previous list
